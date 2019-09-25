@@ -28,19 +28,25 @@ class ViewServiceProvider extends ServiceProvider
         $menu = [
             ['name'=>'Dashboard',
             'url'=>'/dashboard',
-            'icon'=>'account_circle'],
+            'icon'=>'home'],
             ['name'=>'Books',
-            'url'=>'/books',
-            'icon'=>'account_circle'],
-            ['name'=>'Book Categories',
-            'url'=>'/categories',
-            'icon'=>'account_circle'],
-            ['name'=>'Book Author',
-            'url'=>'/authors',
-            'icon'=>'account_circle'],
-            ['name'=>'Book Publisher',
-            'url'=>'/publishers',
-            'icon'=>'account_circle'],
+            'icon'=>'book',
+            'menus'=> [
+                ['name'=>'Books',
+                'url'=>'/books',
+                'icon'=>'account_circle'],
+                ['name'=>'Book Categories',
+                'url'=>'/categories',
+                'icon'=>'account_circle'],
+                ['name'=>'Book Author',
+                'url'=>'/authors',
+                'icon'=>'account_circle'],
+                ['name'=>'Book Publisher',
+                'url'=>'/publishers',
+                'icon'=>'account_circle']
+                ]
+            ],
+            
             ['name'=>'Member',
             'url'=>'/members',
             'icon'=>'account_circle']
