@@ -24,6 +24,7 @@
                             <template v-if="formDefinition[group]">
                                 <div v-for="(item,i) in formDefinition[group]" :key="i">
                                     <component :is="`${item.type}Form`"
+                                    :items="item.items"
                                     :readOnly="item.readOnly"
                                     :editMode="editMode"
                                     v-model="data[item.model]"
@@ -54,6 +55,7 @@
         mapMutations
     } from "vuex";
     import winkelSimpleTable from '../simpleTable';
+    import selectForm from './selectForm.vue';
     import popupForm from './popupForm.vue';
     import imageForm from './imageForm.vue';
     import inputForm from './inputForm.vue';
@@ -62,7 +64,8 @@
             winkelSimpleTable,
             popupForm,
             imageForm,
-            inputForm
+            inputForm,
+            selectForm
         },
         props:{
             formDefinition:{

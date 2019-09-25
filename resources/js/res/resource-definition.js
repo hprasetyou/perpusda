@@ -64,6 +64,15 @@ export default {
                     label:'Name',
                     model:'name',
                     type:'input'
+                },
+                {
+                    label:'Gender',
+                    model:'gender',
+                    type:'select',
+                    items:[
+                        {value:'m',text:'Male'},
+                        {value:'f',text:'Female'}
+                    ]
                 }
             ]
         },
