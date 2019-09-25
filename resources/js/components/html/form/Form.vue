@@ -27,6 +27,7 @@
                                     :items="item.items"
                                     :readOnly="item.readOnly"
                                     :editMode="editMode"
+                                    :objUrl="item.objUrl"
                                     v-model="data[item.model]"
                                     :label="item.label"></component>
                                 </div>
@@ -59,6 +60,7 @@
     import popupForm from './popupForm.vue';
     import imageForm from './imageForm.vue';
     import inputForm from './inputForm.vue';
+    import one2manyForm from './one2manyForm.vue';
     import textareaForm from './textareaForm.vue';
     export default {
         components: {
@@ -67,7 +69,8 @@
             imageForm,
             inputForm,
             textareaForm,
-            selectForm
+            selectForm,
+            one2manyForm
         },
         props:{
             formDefinition:{

@@ -23,6 +23,11 @@ class ResourceController extends Controller
     private function decamelize($string) {
         return strtolower(preg_replace(['/([a-z\d])([A-Z])/', '/([^_])([A-Z][a-z])/'], '$1_$2', $string));
     }
+
+    protected function search($data,$q){
+        return $data->where('name', 'like', '%'. $q .'%');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -34,7 +39,11 @@ class ResourceController extends Controller
         $perpage = $request->query('perpage')?$request->query('perpage'):15;
         $orderCol = $request->query('sortby')?$request->query('sortby'):'id';
         $orderDirection = $request->query('descending') == 'true'?'desc':'asc';
-        $data = $this->prepareData($request)->orderBy($orderCol,$orderDirection)->paginate($perpage);
+        $data = $this->prepareData($request);
+        if($request->query('q')){
+            $data = $this->search($data,$request->query('q'));
+        }
+        $data = $data->orderBy($orderCol,$orderDirection)->paginate($perpage);
         return $data->toJson(JSON_PRETTY_PRINT);
     }
 

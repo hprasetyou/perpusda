@@ -23,6 +23,12 @@ export default {
                 label:'Name',
                 model:'name',
                 type:'input'
+            },
+            {
+                label:'Author',
+                model:'author',
+                type:'one2many',
+                objUrl:'author'
             }
         ],
         right:[
