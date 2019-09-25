@@ -40,6 +40,9 @@ class ViewServiceProvider extends ServiceProvider
             'icon'=>'account_circle'],
             ['name'=>'Book Publisher',
             'url'=>'/publishers',
+            'icon'=>'account_circle'],
+            ['name'=>'Member',
+            'url'=>'/members',
             'icon'=>'account_circle']
         ];
         View::share('foo', json_encode($menu));

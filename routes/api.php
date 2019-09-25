@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 Route::group(['middleware'=>'auth:api','namespace' => 'Admin'],function () {
-    $resources = ['user','book','category','author','publisher'];
+    $resources = ['user','book','category','author','publisher','member'];
     $routeResouce = [];
     foreach ($resources as $key => $item) {
         $routeResouce[$item] = ucfirst($item) . 'Controller';

@@ -59,12 +59,14 @@
     import popupForm from './popupForm.vue';
     import imageForm from './imageForm.vue';
     import inputForm from './inputForm.vue';
+    import textareaForm from './textareaForm.vue';
     export default {
         components: {
             winkelSimpleTable,
             popupForm,
             imageForm,
             inputForm,
+            textareaForm,
             selectForm
         },
         props:{
