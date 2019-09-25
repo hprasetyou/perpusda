@@ -4,7 +4,7 @@
 @section('content')
         <v-app id="inspire">
             @include('layouts.partial.navigation')
-            <v-app-bar app color="indigo" dark>
+            <v-app-bar app color="teal" dark>
                 <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
                 <v-toolbar-title>Application</v-toolbar-title>
             </v-app-bar>
@@ -15,7 +15,7 @@
                     </v-layout>
                 </v-container>
             </v-content>
-            <v-footer color="indigo" app inset>
+            <v-footer color="teal" app inset>
                 <span class="white--text">&copy; 2017</span>
             </v-footer>
         </v-app>

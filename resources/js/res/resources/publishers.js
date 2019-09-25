@@ -23,6 +23,11 @@ export default {
                 label:'Name',
                 model:'name',
                 type:'input'
+            },
+            {
+                label:'Summary',
+                model:'summary',
+                type:'textarea'
             }
         ]
     },
