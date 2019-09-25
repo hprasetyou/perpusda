@@ -9,18 +9,15 @@
                 item-value="value"></v-select>
             </div>
         </v-layout>
-        <v-layout row px-3 wrap v-show="!editMode || readOnly">
-            <v-flex xs3>
-                <label for="">{{ label }}</label>
-            </v-flex>
-            <v-flex xs9>
-                <label for="">{{ getItemValue(value) }}</label>
-            </v-flex>
-        </v-layout>
+        <value-form :label="label" :value="getItemValue(value)" v-show="!editMode || readOnly" />
     </div>
 </template>
 <script>
-    export default {
+import valueForm from './valueForm';
+export default {
+    components:{
+        valueForm
+    },
         props: {
             readOnly: {
                 type: Boolean,
@@ -48,7 +45,7 @@
         },
         methods:{
             getItemValue(key){
-                let out = false;
+                let out = '';
                 for (const item of this.items) {
                     if(item.value == key){
                         out = item.text
