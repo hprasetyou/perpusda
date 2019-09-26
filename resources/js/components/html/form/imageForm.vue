@@ -12,7 +12,7 @@
         }" @change="onChange">
 
                 </picture-input>
-                <v-img :src="value" v-show="!editMode || readOnly" alt="" />
+                <v-img v-if="value" :src="value" v-show="!editMode || readOnly" alt="" />
             </v-flex>
         </v-layout>
     </div>
@@ -44,7 +44,6 @@ export default {
     },
     methods: {
         onChange (image) {
-        console.log(image)
         if (image) {
             console.log('Picture loaded.')
             this.image = image
