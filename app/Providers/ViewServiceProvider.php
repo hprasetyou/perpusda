@@ -46,10 +46,12 @@ class ViewServiceProvider extends ServiceProvider
                 'icon'=>'account_circle']
                 ]
             ],
-            
             ['name'=>'Member',
             'url'=>'/members',
-            'icon'=>'account_circle']
+            'icon'=>'account_circle'],
+            ['name'=>'Borrowed books',
+            'url'=>'/borrowed_books',
+            'icon'=>'book']
         ];
         View::share('foo', json_encode($menu));
     }
