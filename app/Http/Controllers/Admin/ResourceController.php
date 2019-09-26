@@ -13,7 +13,7 @@ class ResourceController extends Controller
     public function __construct(){
         $objName = $this->decamelize(str_replace('Controller','',(new \ReflectionClass($this))->getShortName()));
         $this->tbName = \Illuminate\Support\Pluralizer::plural($objName,2);
-        $this->model = 'App\\' . ucfirst($objName);
+        $this->model = 'App\\' . str_replace('_', '', ucwords($objName, '_'));
     }
 
     protected function prepareData(Request $request){

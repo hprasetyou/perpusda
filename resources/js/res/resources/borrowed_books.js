@@ -1,12 +1,8 @@
 export default {
     title:'Borrowed Books',
-    header:[{
-        text: 'ID',
-        align: 'left',
-        value: 'id'
-    },
+    header:[
     {
-        text: 'Name',
+        text: 'ID',
         value: 'name'
     },
     {
@@ -20,7 +16,7 @@ export default {
     formDefinition:{
         left:[
             {
-                label:'Name',
+                label:'ID',
                 model:'name',
                 type:'input',
                 readOnly:true
@@ -34,8 +30,10 @@ export default {
             {
                 label:'Member',
                 model:'member_id',
+                propToShow:'id-name',
                 type:'one2many',
-                objUrl:'member'
+                objUrl:'member',
+                disableAdd:true
             }
         ],
         center:[
@@ -46,5 +44,5 @@ export default {
             }
         ]
     },
-    dataUrl:'/api/member'
+    dataUrl:'/api/borrowed_book'
 }

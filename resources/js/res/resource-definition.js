@@ -4,6 +4,7 @@ import members from './resources/members';
 import categories from './resources/categories';
 import publishers from './resources/publishers';
 import books from './resources/books';
+import borrowed_books from './resources/borrowed_books';
 
 
 export default {
@@ -12,5 +13,6 @@ export default {
     members,
     categories,
     publishers,
-    books
+    books,
+    borrowed_books
 }

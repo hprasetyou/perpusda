@@ -10,7 +10,7 @@
                 item-value="value"
                 @keyup="searchData"
                 >
-                    <template v-slot:append-item>
+                    <template v-if="!disableAdd" v-slot:append-item>
                         <v-layout px-4>
                             <v-text-field label="New data" v-model="newData" >
                                 <v-icon slot="append" @click="addData" color="success">check</v-icon>
@@ -29,6 +29,14 @@ export default {
         valueForm
     },
         props: {
+            disableAdd:{
+                type: Boolean,
+                default: false
+            },
+            propToShow:{
+                type: String,
+                default:'name'
+            },
             readOnly: {
                 type: Boolean,
                 default: false
@@ -58,7 +66,12 @@ export default {
             items(){
 
                 return this.entries.map(item=>{
-                    return {value:item.id,text:item.name}
+                    const props = this.propToShow.split("-");
+                    let text = ''
+                    for (const prop of props) {
+                        text += item[prop] + ' '
+                    }
+                    return {value:item.id,text}
                 })
             }
         },

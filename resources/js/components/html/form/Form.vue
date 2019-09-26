@@ -29,6 +29,8 @@
                                     :editMode="editMode"
                                     :objUrl="item.objUrl"
                                     v-model="data[item.model]"
+                                    :disableAdd="item.disableAdd"
+                                    :propToShow="item.propToShow"
                                     :label="item.label"></component>
                                 </div>
                             </template>

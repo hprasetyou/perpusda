@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 class BorrowedBookController extends ResourceController
 {    /**
@@ -13,9 +14,11 @@ class BorrowedBookController extends ResourceController
     */
    protected function prepareStoreData(Request $request, int $id = null){
        $user = request()->user();
-       $time = Carbon\Carbon::now();
-       $data->user_id = $user->getId();
+       $time = Carbon::now();
+       $data = parent::prepareStoreData($request,$id);
+       $data->user_id = $user->id;
        $data->time = $time->toDateTimeString();
+       $data->name = $user->id . $data->member_id .$time->timestamp;
        return $data;
    }
 }
