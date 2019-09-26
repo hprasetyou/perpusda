@@ -7,11 +7,13 @@ export default {
     },
     {
         text: 'Book',
-        value: 'book.name'
+        value: 'book.name',
+        sortable: false
     },
     {
         text: 'Member',
-        value: 'member.name'
+        value: 'member.name',
+        sortable: false
     },
     {
         text: 'Created At',

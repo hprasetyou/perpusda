@@ -37,7 +37,7 @@ class ResourceController extends Controller
     public function index(Request  $request)
     {
         $perpage = $request->query('perpage')?$request->query('perpage'):15;
-        $orderCol = $request->query('sortby')?$request->query('sortby'):'id';
+        $orderCol = $request->query('sortby')?$request->query('sortby')[0]:'id';
         $orderDirection = $request->query('descending') == 'true'?'desc':'asc';
         $data = $this->prepareData($request);
         if($request->query('q')){
