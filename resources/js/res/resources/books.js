@@ -25,16 +25,45 @@ export default {
                 type:'input'
             },
             {
+                label:'Category',
+                model:'categories_id',
+                type:'one2many',
+                objUrl:'category'
+            },
+            {
+                label:'Summary',
+                model:'summary',
+                type:'textarea'
+            }
+        ],
+        center:[
+            {
+                label:'ISBN',
+                model:'isbn',
+                type:'input'
+            },
+            {
+                label:'Edition',
+                model:'edition',
+                type:'input'
+            },
+            {
                 label:'Author',
-                model:'author',
+                model:'author_id',
                 type:'one2many',
                 objUrl:'author'
+            },
+            {
+                label:'Publisher',
+                model:'publisher_id',
+                type:'one2many',
+                objUrl:'publisher'
             }
         ],
         right:[
             {
-                label:'Product Image',
-                model:'mainImage',
+                label:'Cover Image',
+                model:'cover',
                 type:'image'
             }
         ]

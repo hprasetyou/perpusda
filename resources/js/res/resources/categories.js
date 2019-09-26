@@ -24,13 +24,6 @@ export default {
                 model:'name',
                 type:'input'
             }
-        ],
-        right:[
-            {
-                label:'Product Image',
-                model:'mainImage',
-                type:'image'
-            }
         ]
     },
     dataUrl:'/api/category'

@@ -1,16 +1,23 @@
 <template>
     <div>
         <v-layout v-show="editMode && !readOnly"  >
-            <div>
-                <v-combobox
+            <v-autocomplete
                 v-model="inputVal"
                 :search-input.sync="search"
                 :items="items"
                 :label="label" 
                 item-text="text"
                 item-value="value"
-                ></v-combobox>
-            </div>
+                @keyup="searchData"
+                >
+                    <template v-slot:append-item>
+                        <v-layout px-4>
+                            <v-text-field label="New data" v-model="newData" >
+                                <v-icon slot="append" @click="addData" color="success">check</v-icon>
+                            </v-text-field>
+                        </v-layout >
+                    </template>
+                </v-autocomplete>
         </v-layout>
         <value-form :label="label" :value="getItemValue(value)" v-show="!editMode || readOnly" />
     </div>
@@ -40,9 +47,11 @@ export default {
         },
         data(){
             return {
+                newData:'',
                 inputVal:'',
                 entries:[],
-                search:''
+                search:'',
+                inputReady: true
             }
         },
         computed:{
@@ -52,6 +61,9 @@ export default {
                     return {value:item.id,text:item.name}
                 })
             }
+        },
+        mounted() {
+            this.searchData()
         },
         methods:{
             getItemValue(key){
@@ -64,22 +76,44 @@ export default {
                 return out;
             },
             getData(s) {
+                let params = '';
                 if(s){
-                    this.axios.get(`/api/${this.objUrl}?q=${s}`)
+                    params = `?q=${s}`;
+                }
+                return new Promise((resolve,reject)=>{
+                this.axios.get(`/api/${this.objUrl}${params}`)
                             .then(response => {
                                 this.entries = response.data.data;
+                                resolve(response)
                             })
-                }
+                })
             },
-            getItems(){
-                
+            addData(){
+                this.axios.post(`/api/${this.objUrl}`,{
+                    name:this.newData
+                }).then(response => {
+                        this.entries.push(response.data)
+                        this.inputVal = {
+                                value: response.data.id,
+                                text: response.data.name
+                        }
+                        this.newData = ''
+                    })
+            },
+            searchData(){
+                const val = this.search;
+                if(this.inputReady){
+                    this.getData(val).then(data=>{
+                        this.inputReady = false;
+                    })
+                }else{
+                    setTimeout(() => {
+                        this.inputReady = true;
+                    }, 1000);
+                }
             }
         },
         watch:{
-            search (val) {
-                console.log(val);
-                this.getData(val)
-            },
             value(){
                 this.inputVal = this.value;
             },
