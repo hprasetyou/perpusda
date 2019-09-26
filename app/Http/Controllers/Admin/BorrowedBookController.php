@@ -21,4 +21,8 @@ class BorrowedBookController extends ResourceController
        $data->name = $user->id . $data->member_id .$time->timestamp;
        return $data;
    }
+   protected function prepareData(Request $request){
+       $data = $this->model::with(['book','member']);
+       return $data;
+   }
 }

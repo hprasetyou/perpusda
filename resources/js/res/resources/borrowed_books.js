@@ -6,6 +6,14 @@ export default {
         value: 'name'
     },
     {
+        text: 'Book',
+        value: 'book.name'
+    },
+    {
+        text: 'Member',
+        value: 'member.name'
+    },
+    {
         text: 'Created At',
         value: 'created_at'
     },
