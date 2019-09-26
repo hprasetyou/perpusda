@@ -34,6 +34,12 @@ export default {
                 type:'one2many',
                 objUrl:'member',
                 disableAdd:true
+            },
+            {
+                label:'Date time',
+                model:'time',
+                type:'input',
+                readOnly:true
             }
         ],
         center:[
