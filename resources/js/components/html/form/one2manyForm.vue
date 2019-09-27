@@ -76,7 +76,6 @@ export default {
             }
         },
         mounted() {
-            this.searchData()
         },
         methods:{
             getItemValue(key){
@@ -88,15 +87,22 @@ export default {
                 }
                 return out;
             },
-            getData(s) {
+            getData(s,byId = false) {
                 let params = '';
                 if(s){
                     params = `?q=${s}`;
+                    if(byId){
+                        params = `/${s}`;
+                    }
                 }
                 return new Promise((resolve,reject)=>{
                 this.axios.get(`/api/${this.objUrl}${params}`)
                             .then(response => {
-                                this.entries = response.data.data;
+                                if(byId){
+                                    this.entries.push(response.data);
+                                }else{
+                                    this.entries = response.data.data;
+                                }
                                 resolve(response)
                             })
                 })
@@ -129,6 +135,12 @@ export default {
         watch:{
             value(){
                 this.inputVal = this.value;
+                this.inputVal = this.value;
+                const exist = this.items.find(item=>item.value == this.value);
+                if(!exist){
+                    this.getData(this.value,true)
+                }
+                
             },
             inputVal(){
                 // this.value = this.inputVal;

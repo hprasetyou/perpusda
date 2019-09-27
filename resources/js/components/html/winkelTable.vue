@@ -84,7 +84,6 @@
                 if(!actionHeader.length>0){
                     header.push({ text: 'Actions', value: 'action', sortable: false })
                 }
-                console.log(header);
                 return header;
             }
         },
