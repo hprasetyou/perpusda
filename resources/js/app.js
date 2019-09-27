@@ -14,13 +14,21 @@ import VueAxios from 'vue-axios'
 Vue.use(Vuetify);
 Vue.use(VueRouter);
 
-const vuetifyOptions = { }
+const vuetifyOptions = {
+  defaultAssets: {
+    font: true,
+    icons: 'md'
+  },
+  icons: {
+    iconfont: 'md',
+  }
+ }
 const vuetify = new Vuetify(vuetifyOptions);
 
 Vue.use(VuetifyConfirm, {
   vuetify,
-  buttonTrueText: 'Accept',
-  buttonFalseText: 'Discard',
+  buttonTrueText: 'Confirm',
+  buttonFalseText: 'Cancel',
   color: 'warning',
   icon: 'warning',
   title: 'Warning',

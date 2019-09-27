@@ -2,7 +2,6 @@
 @extends('layouts.app')
 
 @section('content')
-        <v-app id="inspire">
             @include('layouts.partial.navigation')
             <v-app-bar app color="teal" dark>
                 <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
@@ -18,5 +17,4 @@
             <v-footer color="teal" app inset>
                 <span class="white--text">&copy; 2017</span>
             </v-footer>
-        </v-app>
 @endsection

@@ -4,7 +4,7 @@
             <v-form lazy-validation @submit="doLogin">
                 <v-text-field v-model="credential.username" label="E-mail" required></v-text-field>
                 <v-text-field v-model="credential.password" type="password" class="input-group--focused"></v-text-field>
-                <v-btn @click="doLogin" color="success">
+                <v-btn @click="doLogin" color="success" >
                     Login
                 </v-btn>
             </v-form>

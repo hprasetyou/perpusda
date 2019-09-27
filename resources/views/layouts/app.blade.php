@@ -14,9 +14,11 @@
 
 <body>
 
-    <div id="app">
-    <wk-snackbar></wk-snackbar>
-        @yield('content')
+    <div id="app">  
+        <v-app>
+            <wk-snackbar></wk-snackbar>
+            @yield('content')
+        </v-app>
     </div>
 
     <script src="js/app.js"></script>

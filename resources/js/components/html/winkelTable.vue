@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-data-table :hide-default-footer="hideAction" v-model="selected" show-select :headers="tableHeader" :items="tableData" :options.sync="pagination"
-        :footer-props="{'items-per-page-options':[15,30,50]}"
+        :footer-props="footerProps"
             :server-items-length="totalItem" :loading="loading" class="elevation-1">
                 <template v-slot:item.action="{ item }">
                     <v-icon v-for="action in actions" :key="action.name"
@@ -53,7 +53,11 @@
                 pagination: {},
                 totalItem: 0,
                 loading: true,
-                tableData:[]
+                tableData:[],
+                footerProps:{    
+                    itemsPerPageOptions:[15,30,50]
+                }
+                
             }
         },
         watch: {
