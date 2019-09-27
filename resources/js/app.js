@@ -13,10 +13,22 @@ import VueAxios from 'vue-axios'
 
 Vue.use(Vuetify);
 Vue.use(VueRouter);
-Vue.use(VuetifyConfirm);
+
+const vuetifyOptions = { }
+const vuetify = new Vuetify(vuetifyOptions);
+
+Vue.use(VuetifyConfirm, {
+  vuetify,
+  buttonTrueText: 'Accept',
+  buttonFalseText: 'Discard',
+  color: 'warning',
+  icon: 'warning',
+  title: 'Warning',
+  width: 350,
+  property: '$confirm'
+})
 const mApiService = new apiService();
 Vue.use(VueAxios, mApiService)
-const vuetifyOptions = { }
 
 Vue.component(
   'login-form',
@@ -49,7 +61,7 @@ const app = new Vue({
     el: '#app',
     router,
     store,
-    vuetify: new Vuetify(vuetifyOptions),
+    vuetify,
     data() {
         return {
             message: 'Hello',

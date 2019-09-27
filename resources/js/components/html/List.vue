@@ -7,7 +7,7 @@
         </v-layout>
         <v-divider></v-divider>
         <br>
-       <winkle-table @editRow="cellClicked" :headers="header" :dataUrl="dataUrl">
+       <winkle-table ref="table" @editRow="cellClicked"  @deleteRow="deleteConfirmation" :headers="header" :dataUrl="dataUrl">
        </winkle-table>
        
     </div>
@@ -15,6 +15,9 @@
 
 <script>
     import winkleTable from './winkelTable.vue';
+    import {
+        mapMutations
+    } from "vuex";
 
     export default {
         components:{
@@ -31,9 +34,31 @@
             this.updateConf()
         },
         methods: {
+            ...mapMutations(["showSnackbar", "closeSnackbar"]),
+            openSnackbar(options) {
+                this.showSnackbar(options)
+            },
             cellClicked(data){
                 this.$router.push(`${this.$route.path}/${data.id}`)
                 
+            },       
+            deleteConfirmation(data) {
+                
+                this.$confirm('Delete this data?').then(res => {
+                    if (res) {
+                        this.deleteData(data);
+                    }
+                })
+            },
+            deleteData(data) {
+                this.axios.delete(`${this.dataUrl}/${data.id}`)
+                    .then(response => {
+                        this.openSnackbar({
+                            text: "Data has been deleted!",
+                            color: "green"
+                        })
+                        this.$refs.table.getData()
+                    })
             },
             updateConf(){
                 this.title = this.$route.meta.title;

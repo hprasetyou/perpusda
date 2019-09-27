@@ -4,18 +4,12 @@
         :footer-props="{'items-per-page-options':[15,30,50]}"
             :server-items-length="totalItem" :loading="loading" class="elevation-1">
                 <template v-slot:item.action="{ item }">
-                    <v-icon
+                    <v-icon v-for="action in actions" :key="action.name"
                         small
                         class="mr-2"
-                        @click="editRow(item)"
+                        @click="rowAction(action.name,item)"
                     >
-                        edit
-                    </v-icon>
-                    <v-icon
-                        small
-                        @click="deleteRow(item)"
-                    >
-                        delete
+                        {{action.icon}}
                     </v-icon>
                 </template>
         </v-data-table>
@@ -39,6 +33,17 @@
             itemData: {
                 type: Array,
                 default: ()=>[]
+            },
+            actions:{
+
+                type: Array,
+                default: ()=>[{
+                    name:'edit',
+                    icon:'edit'
+                },{
+                    name:'delete',
+                    icon:'delete'
+                }]
             }
         },
         data() {
@@ -88,11 +93,8 @@
             }
         },
         methods: {
-            editRow(data){
-                this.$emit('editRow',data)
-            },
-            deleteRow(data){
-                this.$emit('deleteRow',data)
+            rowAction(action,data){
+                this.$emit(`${action}Row`,data)
             },
             parseColValue(colData,key){
                 const keys = key.split('.');

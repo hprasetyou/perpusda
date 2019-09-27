@@ -144,7 +144,7 @@
                     this.data = response.data;
                     this.openSnackbar({
                         text: "All changes saved!",
-                        color: "success"
+                        color: "green"
                     })
                     this.editMode = false;
                     if (this.isNew) {
@@ -171,7 +171,7 @@
                         this.$router.push(this.baseUrl);
                         this.openSnackbar({
                             text: "Data has been deleted!",
-                            color: "success"
+                            color: "green"
                         })
                     })
             },
