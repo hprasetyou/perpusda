@@ -9,11 +9,15 @@
                 </v-btn>
                 <v-btn color="error" v-if="!isNew" @click="deleteConfirmation">
                     Delete
+                    <v-icon dark right>delete</v-icon>
                 </v-btn>
-                <v-btn color="primary" @click="editMode = !editMode">{{ editMode?'Cancel':'Edit' }}</v-btn>
+                <v-btn color="primary" @click="editMode = !editMode">{{ editMode?'Cancel':'Edit' }}
+                    <v-icon dark right>{{ editMode?'cancel':'edit' }}</v-icon></v-btn>
                 <v-btn color="success" @click="saveData" v-if="editMode">
                     Save
+                    <v-icon dark right>check</v-icon>
                 </v-btn>
+                <slot name="additional-actions"></slot>
             </v-layout>
             <v-divider></v-divider>
             <br>
