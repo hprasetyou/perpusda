@@ -68,6 +68,7 @@
     import inputForm from './inputForm.vue';
     import one2manyForm from './one2manyForm.vue';
     import textareaForm from './textareaForm.vue';
+    import dateForm from './dateForm.vue';
     export default {
         components: {
             winkelSimpleTable,
@@ -76,7 +77,8 @@
             inputForm,
             textareaForm,
             selectForm,
-            one2manyForm
+            one2manyForm,
+            dateForm
         },
         props:{
             formDefinition:{

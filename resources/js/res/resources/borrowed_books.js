@@ -48,7 +48,7 @@ export default {
             {
                 label:'Date time',
                 model:'time',
-                type:'input',
+                type:'date',
                 readOnly:true
             }
         ],

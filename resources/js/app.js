@@ -8,7 +8,8 @@ import { store } from './store/store'
 import wkSnackbar from './components/html/utils/winkelSnackbar.vue';
 import VuetifyConfirm from 'vuetify-confirm';
 import apiService from './apiService';
-import VueAxios from 'vue-axios'
+import VueAxios from 'vue-axios';
+import VueMoment from 'vue-moment';
 
 
 Vue.use(Vuetify);
