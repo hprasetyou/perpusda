@@ -151,7 +151,7 @@
                     this.openSnackbar({
                         text: "All changes saved!",
                         color: "green"
-                    })
+                    });
                     this.editMode = false;
                     if (this.isNew) {
                         this.isNew = false;
