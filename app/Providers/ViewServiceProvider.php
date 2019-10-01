@@ -27,7 +27,7 @@ class ViewServiceProvider extends ServiceProvider
         // Using Closure based composers...
         $menu = [
             ['name'=>'Dashboard',
-            'url'=>'/dashboard',
+            'url'=>'/',
             'icon'=>'home'],
             ['name'=>'Books',
             'icon'=>'book',

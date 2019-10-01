@@ -2,7 +2,7 @@ import ListComponent from './components/html/List.vue';
 import DetailComponent from './components/html/Detail.vue';
 import resConf from './res/resource-definition';
 import borrowedBookRoutes from './routes/borrowed_books';
-import dashboard from './components/pages/Dashboard';
+import dashboard from './components/pages/Dashboard.vue';
 
 let routes = [];
 

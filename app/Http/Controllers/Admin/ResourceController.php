@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Schema;
 
 class ResourceController extends Controller
 {
@@ -14,6 +15,10 @@ class ResourceController extends Controller
         $objName = $this->decamelize(str_replace('Controller','',(new \ReflectionClass($this))->getShortName()));
         $this->tbName = \Illuminate\Support\Pluralizer::plural($objName,2);
         $this->model = 'App\\' . str_replace('_', '', ucwords($objName, '_'));
+    }
+
+    final protected function getColumns(){
+        return Schema::getColumnListing($this->tbName);
     }
 
     protected function prepareData(Request $request){
@@ -45,6 +50,11 @@ class ResourceController extends Controller
         }
         $data = $data->orderBy($orderCol,$orderDirection)->paginate($perpage);
         return $data->toJson(JSON_PRETTY_PRINT);
+    }
+
+    protected function filterData(Request  $request, $data){
+        $columns = $this->getColumns();
+        return $data;
     }
 
     /**

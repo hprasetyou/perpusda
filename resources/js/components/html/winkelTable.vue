@@ -34,6 +34,10 @@
                 type: Array,
                 default: ()=>[]
             },
+            filterData:{
+                type: Array,
+                default: ()=>[]
+            },
             actions:{
 
                 type: Array,
@@ -123,11 +127,11 @@
                                 page: page,
                                 perpage: rowsPerPage,
                                 sortby: sortBy,
-                                descending
+                                descending,
+                                filter: this.filterData
                             }
                         })
                         .then(response => {
-                            // handle success
                             this.loading = false;
                             resolve({
                                 items: response.data.data,
@@ -143,7 +147,7 @@
                         .then(data => {
                             this.tableData = data.items
                             this.totalItem = data.total
-                        })
+                        });
                 }else{
                     this.loading = false;
                 }

@@ -23,6 +23,10 @@ export default {
         text: 'Updated At',
         value: 'updated_at'
     }],
+    filterable:[{
+        name:'book',
+        label:'Book'
+    }],
     formDefinition:{
         left:[
             {

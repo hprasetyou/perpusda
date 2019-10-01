@@ -7,7 +7,9 @@
         </v-layout>
         <v-divider></v-divider>
         <br>
-       <winkle-table ref="table" @editRow="cellClicked"  @deleteRow="deleteConfirmation" :headers="header" :dataUrl="dataUrl">
+        <winkel-table-filter @data-updated="updateFilter" :columns="filterable"/>
+        <br>
+       <winkle-table :filterData="filterData" ref="table" @editRow="cellClicked"  @deleteRow="deleteConfirmation" :headers="header" :dataUrl="dataUrl">
        </winkle-table>
        
     </div>
@@ -15,19 +17,23 @@
 
 <script>
     import winkleTable from './winkelTable.vue';
+    import winkelTableFilter from './utils/winkelTableFilter.vue';
     import {
         mapMutations
     } from "vuex";
 
     export default {
         components:{
-            winkleTable
+            winkleTable,
+            winkelTableFilter
         },
         data(){
             return {
                 title: '',
                 dataUrl:'',
-                header: []
+                header: [],
+                filterData:[],
+                filterable: []
             }
         },
         mounted() {
@@ -64,6 +70,11 @@
                 this.title = this.$route.meta.title;
                 this.header = this.$route.meta.header;
                 this.dataUrl = this.$route.meta.dataUrl;
+                this.filterable = this.$route.meta.filterable;
+            },
+            updateFilter(data){
+                this.filterData = data
+                this.$refs.table.getDataFromApi()
             }
         },
         watch: {
