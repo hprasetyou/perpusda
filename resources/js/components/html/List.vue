@@ -73,8 +73,8 @@
                 this.filterable = this.$route.meta.filterable;
             },
             updateFilter(data){
-                this.filterData = data
-                this.$refs.table.getDataFromApi()
+                this.$set(this,'filterData',data);
+                this.$refs.table.getData()
             }
         },
         watch: {

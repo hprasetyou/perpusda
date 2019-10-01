@@ -74,21 +74,24 @@ export default {
         applyFilter(){ 
             const filterColumn = this.filterColumn;
             const column = this.columns.find(item => item.name == filterColumn);
-            this.appliedFilters.push({
+            const filterExist = this.appliedFilters.findIndex(item => item.column.name == filterColumn);
+            const data = {
                 column,
                 operator:'=',
                 value:this.filterValue
-            });
+            }
+            if(filterExist > -1){
+                this.appliedFilters[filterExist] = data;
+            }else{
+                this.appliedFilters.push(data);
+            }
             this.openFilter = false;
+            this.$emit('data-updated',this.appliedFilters)
         },
         removeFilter(i){
             this.appliedFilters.splice(i,1)
-        }
-    },
-    watch: {
-        appliedFilters(){
             this.$emit('data-updated',this.appliedFilters)
         }
-    },
+    }
 }
 </script>

@@ -47,6 +47,8 @@ class ResourceController extends Controller
         $data = $this->prepareData($request);
         if($request->query('q')){
             $data = $this->search($data,$request->query('q'));
+        }else{
+            $data = $this->filterData($request, $data);
         }
         $data = $data->orderBy($orderCol,$orderDirection)->paginate($perpage);
         return $data->toJson(JSON_PRETTY_PRINT);
@@ -54,6 +56,15 @@ class ResourceController extends Controller
 
     protected function filterData(Request  $request, $data){
         $columns = $this->getColumns();
+        $filter = $request->query('filter');
+        $filterValue = $request->query('filterValue');
+        $filterOperator = $request->query('filterOperator');
+        if($request->query('filter')){
+            foreach ($filter as $key => $col) {
+                $q = $filterValue[$key];
+                $data = $data->where($col, 'like', '%'. $q .'%');
+            }
+        }
         return $data;
     }
 

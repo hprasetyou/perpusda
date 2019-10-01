@@ -120,16 +120,25 @@
                         descending,
                         page,
                         rowsPerPage
-                    } = this.pagination
-
-                    this.axios.get(this.dataUrl, {
-                            params: {
+                    } = this.pagination;
+                    const params = {
                                 page: page,
                                 perpage: rowsPerPage,
                                 sortby: sortBy,
                                 descending,
-                                filter: this.filterData
-                            }
+                                filter:[],
+                                filterValue:[],
+                                filterOperator:[]
+                    }
+                    const filterData = this.filterData;
+
+                    for (let i = 0; i < filterData.length; i++) {
+                        params.filter[i] = filterData[i].column.name;
+                        params.filterValue[i] = filterData[i].value;
+                        params.filterOperator[i] = filterData[i].operator;
+                    }
+                    this.axios.get(this.dataUrl, {
+                            params
                         })
                         .then(response => {
                             this.loading = false;
