@@ -66,7 +66,12 @@ class ResourceController extends Controller
     {
         $data = $this->prepareStoreData($request);
         $data->save();
+        $this->afterStoreData($data);
         return $data->toJson(JSON_PRETTY_PRINT);
+    }
+    
+    protected function afterStoreData($data){
+
     }
 
     /**

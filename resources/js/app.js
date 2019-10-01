@@ -26,6 +26,7 @@ const vuetifyOptions = {
  }
 const vuetify = new Vuetify(vuetifyOptions);
 
+Vue.use(VueMoment);
 Vue.use(VuetifyConfirm, {
   vuetify,
   buttonTrueText: 'Confirm',

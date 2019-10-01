@@ -54,6 +54,12 @@ export default {
         ],
         center:[
             {
+                label:'Status',
+                model:'status',
+                type:'input',
+                readOnly:true
+            },
+            {
                 label:'Remark',
                 model:'remark',
                 type:'textarea'

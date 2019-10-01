@@ -1,18 +1,19 @@
 <template>
     <div>
-        <winkel-form ref="winkelForm" :formDefinition="formDefinition" :dataUrl="dataUrl" :baseUrl="baseUrl"
+        <winkel-form ref="winkelForm" @data-updated="dataUpdated" :formDefinition="formDefinition" :dataUrl="dataUrl" :baseUrl="baseUrl"
             :title="title">
-            <template v-slot:additional-actions>
+            <template v-if="data.status != 'returned'" v-slot:additional-actions>
                 <v-btn @click="dialog = true" color="primary">Return books</v-btn>
             </template>
         </winkel-form>
         <v-dialog v-model="dialog" persistent max-width="290">
             <v-card>
-                <v-card-title class="headline">Use Google's location service?</v-card-title>
-                <v-card-text>Let Google help apps determine location. This means sending anonymous location data to
-                    Google, even when no apps are running.</v-card-text>
-                <v-textarea label="Remark" v-model="returnRemarks">
-                </v-textarea>
+                <v-card-title class="headline">Return books</v-card-title>
+                <v-card-text>
+                    <p>Has been borrowed from <b>{{ data.time | moment("DD-MM-YYYY") }}</b> ({{ duration }} day(s))</p>
+                    <p>Return due date <b>{{ data.due_date | moment("DD-MM-YYYY") }}</b></p>
+                    <p style="color:red" v-if="overdue>0">Overdue: {{ overdue }} day(s)</p>
+                </v-card-text>
                 <v-card-actions>
                     <div class="flex-grow-1"></div>
                     <v-btn color="red darken-1" text @click="dialog = false">Cancel</v-btn>
@@ -24,7 +25,7 @@
 </template>
 <script>
     import winkelForm from '../../html/form/Form';
-    
+
     export default {
         components: {
             winkelForm
@@ -35,8 +36,19 @@
                 dataUrl: '',
                 baseUrl: '',
                 title: '',
-                returnRemarks:'',
-                dialog:false
+                dialog:false,
+                data:{}
+            }
+        },
+        computed:{
+            duration(){
+                const borrow_date = this.$moment(this.data.time);
+                return this.$moment().diff(borrow_date, 'days');
+            },
+            overdue(){
+                const due_date = this.$moment(this.data.due_date);
+                const overdue = this.$moment().diff(due_date, 'days');
+                return overdue > 0? overdue:0;
             }
         },
         mounted() {
@@ -46,18 +58,26 @@
             this.baseUrl = this.$route.meta.baseUrl;
         },
         methods: {
+            dataUpdated(data){
+                this.data = data;
+            },
             returnBook() {
-                this.axios.post(`/api/returned_book`, {
-                        borrowed_book_id: this.$route.params.id,
-                        remark:returnRemarks
+                let action = this.axios.put(`${this.dataUrl}/${this.$route.params.id}`, {
+                    status:'returned'
+                });
+                action.then(response => {
+                    this.data = response.data;
+                    this.$refs.winkelForm.openSnackbar({
+                        text: "All changes saved!",
+                        color: "green"
+                    });
+                    this.dialog = false;
+                }).catch(err => {
+                    this.$refs.winkelForm.openSnackbar({
+                        text: "An error has occured",
+                        color: "error"
                     })
-                    .then(response => {
-                        dialog = false;
-                        this.openSnackbar({
-                            text: "All changes saved!",
-                            color: "green"
-                        });
-                    })
+                })
             }
         },
     }

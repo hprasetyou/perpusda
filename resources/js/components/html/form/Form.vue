@@ -157,6 +157,7 @@
                         this.isNew = false;
                         this.$router.push(`${this.baseUrl}/${response.data.id}`)
                     }
+                    this.$emit('data-updated',response.data)
                 }).catch(err => {
                     this.openSnackbar({
                         text: "An error has occured",
