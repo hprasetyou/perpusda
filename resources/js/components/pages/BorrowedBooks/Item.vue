@@ -2,7 +2,7 @@
     <div>
         <winkel-form ref="winkelForm" @data-updated="dataUpdated" :formDefinition="formDefinition" :dataUrl="dataUrl" :baseUrl="baseUrl"
             :title="title">
-            <template v-if="data.status != 'returned'" v-slot:additional-actions>
+            <template v-if="data.status == 'lost' || data.status =='borrowed'" v-slot:additional-actions>
                 <v-btn @click="dialog = true" color="primary">Return books</v-btn>
             </template>
         </winkel-form>

@@ -36,6 +36,20 @@ export default {
         name:'time',
         label:'Borrow date',
         type:'date'
+    },{
+        name:'status',
+        label:'Status',
+        type:'enum',
+        options:[{
+            text:'Borrowed',
+            value:'borrowed'
+        },{
+            text:'Returned',
+            value:'returned'
+        },{
+            text:'Lost',
+            value:'lost'
+        }]
     }],
     formDefinition:{
         left:[

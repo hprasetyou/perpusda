@@ -33,11 +33,22 @@
                             item-text="label"
                             item-value="value"
                             ></v-select>
-                        <v-text-field
-                            label="Value"
-                            v-model="filterValue"
-                            outlined
-                        ></v-text-field>
+                        <template v-if="filterColumn">
+                            <v-text-field
+                                v-if="['text','number'].indexOf(selectedColumn.type) > -1" 
+                                label="Value"
+                                v-model="filterValue"
+                                outlined
+                            ></v-text-field>
+                            <v-select v-if="selectedColumn.type == 'enum'" 
+                                :items="selectedColumn.options" 
+                                label="Value"
+                                item-text="text"
+                                v-model="filterValue"
+                                outlined
+                                item-value="value"></v-select>
+                                
+                        </template>
                         <v-btn color="" @click="applyFilter">
                             Apply
                         </v-btn>
