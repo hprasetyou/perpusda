@@ -61,8 +61,14 @@ class ResourceController extends Controller
         $filterOperator = $request->query('filterOperator');
         if($request->query('filter')){
             foreach ($filter as $key => $col) {
-                $q = $filterValue[$key];
-                $data = $data->where($col, 'like', '%'. $q .'%');
+                if(in_array($col,$columns)){
+                    $q = $filterValue[$key];
+                    $operator = $filterOperator[$key];
+                    if($operator == 'like'){
+                        $q = '%'. $q .'%';
+                    }
+                    $data = $data->where($col, $operator, $q);
+                }
             }
         }
         return $data;

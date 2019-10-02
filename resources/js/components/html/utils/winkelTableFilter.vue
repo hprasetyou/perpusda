@@ -5,7 +5,7 @@
                 <v-layout class="filter-toolbar">
                     <v-chip-group>
                         <v-chip close @click:close="removeFilter(i)" v-for="(item ,i) in appliedFilters" :key="i">
-                            {{ item.column.label + '=' + item.value }}
+                            {{ `${item.column.label} ${findOperatorByValue(item.operator).label} '${item.value}'` }}
                         </v-chip>
                     </v-chip-group>
                     <v-spacer></v-spacer>
@@ -25,6 +25,14 @@
                             item-value="name"
                             ></v-select>
 
+                        <v-select
+                            :items="operatorTypes"
+                            label="Operator"
+                            v-model="filterOperator"
+                            outlined
+                            item-text="label"
+                            item-value="value"
+                            ></v-select>
                         <v-text-field
                             label="Value"
                             v-model="filterValue"
@@ -62,7 +70,25 @@ export default {
             openFilter: false,
             appliedFilters:[],
             filterColumn:null,
-            filterValue:null
+            filterValue:null,
+            filterOperator:null,
+            operatorTypeAll:[{
+                label:'is equal',
+                value:'=',
+                member:['enum','date','number']
+            },{
+                label:'is contain',
+                value:'like',
+                member:['text']
+            },{
+                label:'more than',
+                value:'>',
+                member:['date','number']
+            },{
+                label:'less than',
+                value:'<',
+                member:['date','number']
+            }]
         }
     },
     props:{
@@ -70,15 +96,32 @@ export default {
             type:Array
         }
     },
-    methods: {
-        applyFilter(){ 
+    computed: {
+        selectedColumn(){
             const filterColumn = this.filterColumn;
             if(filterColumn){
-                const column = this.columns.find(item => item.name == filterColumn);
+                return this.columns.find(item => item.name == filterColumn);
+            }else{
+                return false;
+            }
+        },
+        operatorTypes(){
+            const types = this.operatorTypeAll
+            const columnType = this.selectedColumn.type;
 
+            return types.filter(type => type.member.indexOf(columnType) > -1);
+        }
+    },
+    methods: {
+        findOperatorByValue(value){
+            return this.operatorTypeAll.find(item => item.value == value);
+        },
+        applyFilter(){ 
+            const column = this.selectedColumn;
+            if(column && this.filterOperator){
                 const data = {
                     column,
-                    operator:'=',
+                    operator:this.filterOperator,
                     value:this.filterValue
                 }
                 this.appliedFilters.push(data);

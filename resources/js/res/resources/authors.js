@@ -37,7 +37,8 @@ export default {
     },
     filterable:[{
         name:'name',
-        label:'Name'
+        label:'Name',
+        type:'text'
     }],
     dataUrl:'/api/author'
 }

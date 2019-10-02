@@ -25,7 +25,8 @@ export default {
     }],
     filterable:[{
         name:'book',
-        label:'Book'
+        label:'Book',
+        type:'text'
     }],
     formDefinition:{
         left:[

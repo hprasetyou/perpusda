@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-data-table :hide-default-footer="hideAction" v-model="selected" show-select :headers="tableHeader" :items="tableData" :options.sync="pagination"
+        <v-data-table :hide-default-footer="hideAction" :headers="tableHeader" :items="tableData" :options.sync="pagination"
         :footer-props="footerProps"
         :items-per-page="footerProps.itemsPerPageOptions[0]"
             :server-items-length="totalItem" :loading="loading" class="elevation-1">
@@ -53,7 +53,6 @@
         },
         data() {
             return {
-                selected: [],
                 rowsPerPage: 10,
                 pagination: {},
                 totalItem: 0,
