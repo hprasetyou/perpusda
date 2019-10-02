@@ -16,17 +16,26 @@ export default {
         sortable: false
     },
     {
-        text: 'Created At',
-        value: 'created_at'
+        text: 'Status',
+        value: 'status',
+        sortable: false
     },
     {
-        text: 'Updated At',
-        value: 'updated_at'
+        text:'Borrowed at',
+        value:'time'
     }],
     filterable:[{
         name:'book',
         label:'Book',
         type:'text'
+    },{
+        name:'member',
+        label:'Member',
+        type:'text'
+    },{
+        name:'time',
+        label:'Borrow date',
+        type:'date'
     }],
     formDefinition:{
         left:[
@@ -51,8 +60,14 @@ export default {
                 disableAdd:true
             },
             {
-                label:'Date time',
+                label:'Borrowed at',
                 model:'time',
+                type:'date',
+                readOnly:true
+            },
+            {
+                label:'Return due date',
+                model:'due_date',
                 type:'date',
                 readOnly:true
             }
@@ -62,6 +77,12 @@ export default {
                 label:'Status',
                 model:'status',
                 type:'input',
+                readOnly:true
+            },
+            {
+                label:'Returned at',
+                model:'returned',
+                type:'date',
                 readOnly:true
             },
             {

@@ -14,7 +14,7 @@ class AddReturnedToBorrowedBooksTable extends Migration
     public function up()
     {
         Schema::table('borrowed_books', function (Blueprint $table) {
-            $table->dateTime('returned');
+            $table->dateTime('returned')->nullable();
             $table->enum('status',['borrowed','returned','lost'])->default('borrowed');
             $table->date('due_date');
         });
