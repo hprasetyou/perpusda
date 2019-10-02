@@ -76,6 +76,9 @@ export default {
             }
         },
         mounted() {
+            if(!this.inputVal){
+                this.getData();
+            }
         },
         methods:{
             getItemValue(key){
