@@ -105,6 +105,10 @@ export default {
     props:{
         columns:{
             type:Array
+        },
+        prefilter:{
+            type: Array,
+            default: ()=>[]
         }
     },
     computed: {
@@ -121,6 +125,18 @@ export default {
             const columnType = this.selectedColumn.type;
 
             return types.filter(type => type.member.indexOf(columnType) > -1);
+        }
+    },
+    mounted() {
+    },
+    watch: {
+        prefilter(){
+            this.appliedFilters = this.prefilter.map(filter => ({
+                column: this.columns.find(item => item.name == filter.name),
+                operator:filter.operator,
+                value:filter.value
+            }));
+            this.$emit('data-updated',this.appliedFilters);
         }
     },
     methods: {

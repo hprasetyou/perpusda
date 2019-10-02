@@ -51,6 +51,13 @@ export default {
             value:'lost'
         }]
     }],
+    preFilter:[
+        {
+            name:'status',
+            value:'borrowed',
+            operator: '='
+        }
+    ],
     formDefinition:{
         left:[
             {

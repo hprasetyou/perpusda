@@ -7,7 +7,7 @@
         </v-layout>
         <v-divider></v-divider>
         <br>
-        <winkel-table-filter @data-updated="updateFilter" :columns="filterable"/>
+        <winkel-table-filter @data-updated="updateFilter" :prefilter="preFilter" :columns="filterable"/>
         <br>
        <winkle-table :filterData="filterData" ref="table" @editRow="cellClicked"  @deleteRow="deleteConfirmation" :headers="header" :dataUrl="dataUrl">
        </winkle-table>
@@ -33,7 +33,8 @@
                 dataUrl:'',
                 header: [],
                 filterData:[],
-                filterable: []
+                filterable: [],
+                preFilter:[]
             }
         },
         mounted() {
@@ -71,6 +72,8 @@
                 this.header = this.$route.meta.header;
                 this.dataUrl = this.$route.meta.dataUrl;
                 this.filterable = this.$route.meta.filterable;
+                this.preFilter = this.$route.meta.preFilter;
+                
             },
             updateFilter(data){
                 this.$set(this,'filterData',data);
