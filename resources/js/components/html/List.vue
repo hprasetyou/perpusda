@@ -74,7 +74,6 @@
             },
             updateFilter(data){
                 this.$set(this,'filterData',data);
-                this.$refs.table.getData()
             }
         },
         watch: {

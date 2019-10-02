@@ -73,20 +73,20 @@ export default {
     methods: {
         applyFilter(){ 
             const filterColumn = this.filterColumn;
-            const column = this.columns.find(item => item.name == filterColumn);
-            const filterExist = this.appliedFilters.findIndex(item => item.column.name == filterColumn);
-            const data = {
-                column,
-                operator:'=',
-                value:this.filterValue
-            }
-            if(filterExist > -1){
-                this.appliedFilters[filterExist] = data;
-            }else{
+            if(filterColumn){
+                const column = this.columns.find(item => item.name == filterColumn);
+
+                const data = {
+                    column,
+                    operator:'=',
+                    value:this.filterValue
+                }
                 this.appliedFilters.push(data);
+                this.openFilter = false;
+                this.filterValue = null;
+                this.filterColumn = null;
+                this.$emit('data-updated',this.appliedFilters)
             }
-            this.openFilter = false;
-            this.$emit('data-updated',this.appliedFilters)
         },
         removeFilter(i){
             this.appliedFilters.splice(i,1)

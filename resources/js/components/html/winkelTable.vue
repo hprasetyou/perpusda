@@ -2,6 +2,7 @@
     <div>
         <v-data-table :hide-default-footer="hideAction" v-model="selected" show-select :headers="tableHeader" :items="tableData" :options.sync="pagination"
         :footer-props="footerProps"
+        :items-per-page="footerProps.itemsPerPageOptions[0]"
             :server-items-length="totalItem" :loading="loading" class="elevation-1">
                 <template v-slot:item.action="{ item }">
                     <v-icon v-for="action in actions" :key="action.name"
@@ -77,6 +78,12 @@
                 }
             },
             dataUrl: {
+                handler() {
+                    this.getData()
+                },
+                deep: true
+            },
+            filterData: {
                 handler() {
                     this.getData()
                 },
