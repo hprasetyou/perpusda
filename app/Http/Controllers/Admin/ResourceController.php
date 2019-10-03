@@ -11,6 +11,8 @@ class ResourceController extends Controller
 {
     protected $model;
     protected $tbName;
+    protected $with;
+
     public function __construct(){
         $objName = $this->decamelize(str_replace('Controller','',(new \ReflectionClass($this))->getShortName()));
         $this->tbName = \Illuminate\Support\Pluralizer::plural($objName,2);
@@ -23,6 +25,9 @@ class ResourceController extends Controller
 
     protected function prepareData(Request $request){
         $data = DB::table($this->tbName);
+        if($this->with){
+            $data = $this->model::with($this->with);
+        }
         return $data;
     }
     private function decamelize($string) {
@@ -68,6 +73,15 @@ class ResourceController extends Controller
                         $q = '%'. $q .'%';
                     }
                     $data = $data->where($col, $operator, $q);
+                }elseif(in_array($col,$this->with)){
+                    $q = $filterValue[$key];
+                    $operator = $filterOperator[$key];
+                    if($operator == 'like'){
+                        $q = '%'. $q .'%';
+                    }
+                    $data = $data->whereHas($col, function ($query) use ($operator, $q){
+                        $query->where('name', $operator, $q);
+                    });
                 }
             }
         }

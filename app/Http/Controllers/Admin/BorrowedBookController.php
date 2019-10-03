@@ -9,6 +9,7 @@ use Carbon\Carbon;
 class BorrowedBookController extends ResourceController
 {    
     private $borrow_interval_days = 5;
+    protected $with = ['book','member'];
     /**
     * Prepare data before submit
     * 
@@ -31,33 +32,5 @@ class BorrowedBookController extends ResourceController
        }
        return $data;
    }
-   protected function prepareData(Request $request){
-       $data = $this->model::with(['book','member']);
-       return $data;
-   }
-
-   protected function filterData(Request  $request, $data){
-    $data = parent::filterData($request, $data);
-    $columns = ['book','member'];
-    $filter = $request->query('filter');
-    $filterValue = $request->query('filterValue');
-    $filterOperator = $request->query('filterOperator');
-    if($request->query('filter')){
-        foreach ($filter as $key => $col) {
-            if(in_array($col,$columns)){
-                $q = $filterValue[$key];
-                $operator = $filterOperator[$key];
-                if($operator == 'like'){
-                    $q = '%'. $q .'%';
-                }
-                $data = $data->whereHas($col, function ($query) use ($operator, $q){
-                    $query->where('name', $operator, $q);
-                });
-            }
-        }
-    }
-    return $data;
-}
-
 
 }

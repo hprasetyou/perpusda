@@ -10,12 +10,29 @@ export default {
         value: 'name'
     },
     {
-        text: 'Created At',
-        value: 'created_at'
+        text: 'ISBN',
+        value: 'isbn'
     },
     {
-        text: 'Updated At',
-        value: 'updated_at'
+        text: 'Category',
+        value: 'category.name'
+    },
+    {
+        text: 'Author',
+        value: 'author.name'
+    }],
+    filterable:[{
+        name:'name',
+        label:'Name',
+        type:'text'
+    },{
+        name:'author',
+        label:'Author',
+        type:'text'
+    },{
+        name:'category',
+        label:'Category',
+        type:'text'
     }],
     formDefinition:{
         left:[
