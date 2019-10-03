@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.front')
 
 @section('content')
 <v-container grid-list-md text-xs-center>
