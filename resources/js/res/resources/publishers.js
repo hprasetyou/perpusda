@@ -9,6 +9,11 @@ export default {
         text: 'Name',
         value: 'name'
     }],
+    filterable:[{
+        name:'name',
+        label:'Name',
+        type:'text'
+    }],
     formDefinition:{
         left:[
             {

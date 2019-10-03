@@ -17,6 +17,11 @@ export default {
         text: 'Updated At',
         value: 'updated_at'
     }],
+    filterable:[{
+        name:'name',
+        label:'Name',
+        type:'text'
+    }],
     formDefinition:{
         left:[
             {

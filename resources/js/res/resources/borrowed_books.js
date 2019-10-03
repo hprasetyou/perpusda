@@ -23,6 +23,9 @@ export default {
     {
         text:'Borrowed at',
         value:'time'
+    },{
+        text:'Return due date',
+        value:'due_date'
     }],
     filterable:[{
         name:'book',
@@ -35,6 +38,10 @@ export default {
     },{
         name:'time',
         label:'Borrow date',
+        type:'date'
+    },{
+        name:'due_date',
+        label:'Return due date',
         type:'date'
     },{
         name:'status',
