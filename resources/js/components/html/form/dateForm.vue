@@ -1,15 +1,14 @@
 <template>
     <div>
         <div v-show="editMode && !readOnly">
-            <v-date-picker v-show="showPicker" v-model="inputVal" color="green lighten-1"></v-date-picker>
-            <v-text-field @click="showPicker = true" :label="label" v-model="inputVal" required>
-            </v-text-field>
+            <date v-model="value" :label="label"></date>
         </div>
         <value-form :label="label" :value="value" v-show="!editMode || readOnly" />
     </div>
 </template>
 <script>
 import valueForm from './valueForm';
+import date from './date';
 export default {
     components:{
         valueForm

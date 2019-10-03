@@ -47,7 +47,7 @@
                                 v-model="filterValue"
                                 outlined
                                 item-value="value"></v-select>
-                                
+                            <date v-if="selectedColumn.type == 'date'" v-model="filterValue"  label="Value"></date>
                         </template>
                         <v-btn color="" @click="applyFilter">
                             Apply
@@ -75,7 +75,11 @@
     }
 </style>
 <script>
+import date from '../form/date.vue';
 export default {
+    components:{
+        date
+    },
     data(){
         return {
             openFilter: false,
