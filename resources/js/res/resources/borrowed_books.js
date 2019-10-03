@@ -116,7 +116,8 @@ export default {
             {
                 label:'Remark',
                 model:'remark',
-                type:'textarea'
+                type:'textarea',
+                readOnly:true
             }
         ]
     },

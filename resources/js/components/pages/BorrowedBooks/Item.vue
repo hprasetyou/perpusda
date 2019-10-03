@@ -60,6 +60,10 @@
         methods: {
             dataUpdated(data){
                 this.data = data;
+                if(this.overdue > 0 && this.data.status == 'borrowed'){
+                    const late_penalty = 2000;
+                    this.data.remark = `The library charges ${late_penalty*overdue}(${overdue} x ${late_penalty}) on overdue` ;
+                }
             },
             returnBook() {
                 let action = this.axios.put(`${this.dataUrl}/${this.$route.params.id}`, {
