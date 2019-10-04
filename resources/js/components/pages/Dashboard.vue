@@ -7,3 +7,12 @@
         </v-card>
     </div>
 </template>
+<script>
+export default {
+    data(){
+        return{
+            title:'Dashboard'
+        }
+    }
+}
+</script>
