@@ -11,7 +11,8 @@ import valueForm from './valueForm';
 import date from './date';
 export default {
     components:{
-        valueForm
+        valueForm,
+        date
     },
     props:{
         readOnly:{

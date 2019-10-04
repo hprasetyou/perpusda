@@ -43,11 +43,15 @@
         computed:{
             duration(){
                 const borrow_date = this.$moment(this.data.time);
-                return this.$moment().diff(borrow_date, 'days');
+                console.log(borrow_date,this.$moment());
+                
+                return Math.ceil(this.$moment().diff(borrow_date, 'days', true));
             },
             overdue(){
                 const due_date = this.$moment(this.data.due_date);
-                const overdue = this.$moment().diff(due_date, 'days');
+                const return_date = this.data.status == 'returned' ? this.$moment(this.data.returned):this.$moment()
+                const overdue = return_date.diff(due_date, 'days');
+                
                 return overdue > 0? overdue:0;
             }
         },
@@ -61,13 +65,15 @@
             dataUpdated(data){
                 this.data = data;
                 if(this.overdue > 0 && this.data.status == 'borrowed'){
+                    const overdue = this.overdue;
                     const late_penalty = 2000;
-                    this.data.remark = `The library charges ${late_penalty*overdue}(${overdue} x ${late_penalty}) on overdue` ;
+                    this.data.remark = `The library charges Rp. ${late_penalty*overdue}(${overdue} x ${late_penalty}) due to overdue` ;
                 }
             },
             returnBook() {
                 let action = this.axios.put(`${this.dataUrl}/${this.$route.params.id}`, {
-                    status:'returned'
+                    status:'returned',
+                    remark: this.data.remark
                 });
                 action.then(response => {
                     this.data = response.data;
@@ -76,6 +82,7 @@
                         color: "green"
                     });
                     this.dialog = false;
+                    this.$refs.winkelForm.getData();
                 }).catch(err => {
                     this.$refs.winkelForm.openSnackbar({
                         text: "An error has occured",
