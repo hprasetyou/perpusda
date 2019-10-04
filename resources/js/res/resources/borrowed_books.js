@@ -77,6 +77,7 @@ export default {
                 label:'Book',
                 model:'book_id',
                 type:'one2many',
+                itemImage:'cover',
                 objUrl:'book'
             },
             {

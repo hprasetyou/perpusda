@@ -1,25 +1,35 @@
 <template>
     <div>
-        <v-layout v-show="editMode && !readOnly"  >
-            <v-autocomplete
-                v-model="inputVal"
-                :search-input.sync="search"
-                :items="items"
-                :label="label" 
-                item-text="text"
-                item-value="value"
-                @keyup="searchData"
-                >
-                    <template v-if="!disableAdd" v-slot:append-item>
-                        <v-layout px-4>
-                            <v-text-field label="New data" v-model="newData" >
-                                <v-icon slot="append" @click="addData" color="success">check</v-icon>
-                            </v-text-field>
-                        </v-layout >
-                    </template>
-                </v-autocomplete>
+        <v-layout v-show="editMode && !readOnly">
+            <v-autocomplete v-model="inputVal" :search-input.sync="search" :items="items" :label="label"
+                item-text="text" item-value="value" @keyup="searchData">
+                <template v-if="!disableAdd" v-slot:append-item>
+                    <v-layout px-4>
+                        <v-text-field label="New data" v-model="newData">
+                            <v-icon slot="append" @click="addData" color="success">check</v-icon>
+                        </v-text-field>
+                    </v-layout>
+                </template>
+                <template v-if="itemImage" v-slot:item="data">
+                    <v-list-item-avatar>
+                        <img :src="data.item.image">
+                    </v-list-item-avatar>
+                    <v-list-item-content>
+                        {{ data.item.text }}
+                    </v-list-item-content>
+                </template>
+            </v-autocomplete>
         </v-layout>
-        <value-form :label="label" :value="getItemValue(value)" v-show="!editMode || readOnly" />
+        <div v-show="!editMode || readOnly">
+            <value-form :label="label" :value="getItemValue(value)" v-show="!editMode || readOnly" />
+
+            <v-layout row v-if="itemImage"><v-col
+                    md="9"
+                    offset-md="3">
+                <v-img v-if="itemData[itemImage]" :src="itemData[itemImage]" />
+            </v-col>
+            </v-layout >
+        </div>
     </div>
 </template>
 <script>
@@ -37,6 +47,7 @@ export default {
                 type: String,
                 default:'name'
             },
+            itemImage:{},
             readOnly: {
                 type: Boolean,
                 default: false
@@ -63,15 +74,25 @@ export default {
             }
         },
         computed:{
+            itemData(){
+                if(this.inputVal){
+                    return this.entries.find(item => item.id == this.inputVal)
+                }else{
+                    return false;
+                }
+            },
             items(){
-
                 return this.entries.map(item=>{
                     const props = this.propToShow.split("-");
                     let text = ''
                     for (const prop of props) {
                         text += item[prop] + ' '
                     }
-                    return {value:item.id,text}
+                    const listItem = {value:item.id,text}
+                    if(this.itemImage){
+                        listItem.image = item[this.itemImage]
+                    }
+                    return listItem
                 })
             }
         },

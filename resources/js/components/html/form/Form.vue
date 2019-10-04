@@ -32,6 +32,7 @@
                                     :readOnly="item.readOnly"
                                     :editMode="editMode"
                                     :objUrl="item.objUrl"
+                                    :itemImage="item.itemImage"
                                     v-model="data[item.model]"
                                     :disableAdd="item.disableAdd"
                                     :propToShow="item.propToShow"
