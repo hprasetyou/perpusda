@@ -23,6 +23,7 @@ class CreateBooksTable extends Migration
             $table->bigInteger('author_id');
             $table->bigInteger('publisher_id');
             $table->bigInteger('categories_id');
+            $table->integer('copy')->default(1);
             $table->timestamps();
         });
     }

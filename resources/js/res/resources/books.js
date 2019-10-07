@@ -51,6 +51,11 @@ export default {
                 label:'Summary',
                 model:'summary',
                 type:'textarea'
+            },
+            {
+                label:'Number of copy',
+                model:'copy',
+                type:'input'
             }
         ],
         center:[
