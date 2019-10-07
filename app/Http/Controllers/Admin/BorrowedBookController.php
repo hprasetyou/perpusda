@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use PDF;
 
 class BorrowedBookController extends ResourceController
 {    
@@ -31,6 +32,16 @@ class BorrowedBookController extends ResourceController
             }
        }
        return $data;
+   }
+   
+   public function getBorrowedReport(Request $request){
+        //    $data = $this->prepareData($request);
+           // Fetch all customers from database
+        $data = [];
+        // Send data to the view using loadView function of PDF facade
+        $pdf = PDF::loadView('pdf.borrowed_books.borrowed', $data);
+        // Finally, you can download the file using download function
+        return $pdf->download('borrowed-books.pdf');
    }
 
 }

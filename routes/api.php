@@ -17,10 +17,12 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 Route::group(['middleware'=>'auth:api','namespace' => 'Admin'],function () {
-    $resources = ['user','book','category','author','publisher','member','borrowed_book','returned_book','penalty_return'];
+    Route::get('borrowed_book/report','BorrowedBookController@getBorrowedReport');
+    $resources = ['user','book','category','author','publisher','member','borrowed_book','penalty_return'];
     $routeResouce = [];
     foreach ($resources as $key => $item) {
         $routeResouce[$item] = str_replace('_', '', ucwords($item, '_')) . 'Controller';
     }
     Route::resources($routeResouce);
+    
 });
