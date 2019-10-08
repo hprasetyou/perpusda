@@ -103,6 +103,14 @@ export default {
                 label:'less than',
                 value:'<',
                 member:['date','number']
+            },{
+                label:'more than or equal',
+                value:'>=',
+                member:['date','number']
+            },{
+                label:'less than or equal',
+                value:'<=',
+                member:['date','number']
             }]
         }
     },
