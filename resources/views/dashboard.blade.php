@@ -15,6 +15,6 @@
                 </v-container>
             </v-content>
             <v-footer color="teal" app inset>
-                <span class="white--text">&copy; 2017</span>
+                <span class="white--text">&copy; 2019 <a href="mailto:hprasetyou@gmail.com">Hprasetyou</a></span>
             </v-footer>
 @endsection
