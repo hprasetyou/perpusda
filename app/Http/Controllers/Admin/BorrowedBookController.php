@@ -36,10 +36,19 @@ class BorrowedBookController extends ResourceController
    
    public function getBorrowedReport(Request $request){
         $data = $this->prepareData($request);
-        $data = $this->filterData($request, $data)
-                    ->orderBy('time','asc')->get();
+        $data = $data->where('time','>=',$request->query('start_date'))
+        ->where('time','<=',$request->query('end_date'));
+        if($request->query('status') != 'all'){
+            $data = $data
+            ->where('status','=',$request->query('status'));
+        }
+        $data = $data->orderBy('time','asc')->get();
         // Send data to the view using loadView function of PDF facade
-        $pdf = PDF::loadView('pdf.borrowed_books.borrowed', ['borrowed_books'=>$data]);
+        $pdf = PDF::loadView('pdf.borrowed_books.borrowed', [
+            'borrowed_books'=>$data,
+            'start_date'=>$request->query('start_date'),
+            'end_date'=>$request->query('end_date'),
+            'status'=>$request->query('status')]);
         // Finally, you can download the file using download function
         return $pdf->download('borrowed-books.pdf');
    }

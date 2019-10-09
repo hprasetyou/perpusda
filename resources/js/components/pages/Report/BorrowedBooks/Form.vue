@@ -34,7 +34,9 @@ export default {
     data(){
         return{
             title:'Report',
-            data:{},
+            data:{
+                status:'all'
+            },
             statusItems:[
                 {
                     text:'All',

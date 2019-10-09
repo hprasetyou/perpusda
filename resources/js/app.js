@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
@@ -11,10 +12,6 @@ import apiService from './apiService';
 import VueAxios from 'vue-axios';
 import VueMoment from 'vue-moment';
 
-
-Vue.use(Vuetify);
-Vue.use(VueRouter);
-
 const vuetifyOptions = {
   defaultAssets: {
     font: true,
@@ -25,6 +22,10 @@ const vuetifyOptions = {
   }
  }
 const vuetify = new Vuetify(vuetifyOptions);
+
+Vue.use(Vuetify);
+Vue.use(VueRouter);
+
 
 Vue.use(VueMoment);
 Vue.use(VuetifyConfirm, {

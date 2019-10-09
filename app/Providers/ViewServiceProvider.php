@@ -46,6 +46,13 @@ class ViewServiceProvider extends ServiceProvider
                 'icon'=>'account_circle']
                 ]
             ],
+            ['name'=>'Report',
+            'icon'=>'mdi-file',
+            'menus'=> [
+                ['name'=>'Borrowed books',
+                'url'=>'/reports/borrowed_books',
+                'icon'=>'account_circle'],
+            ]],
             ['name'=>'Member',
             'url'=>'/members',
             'icon'=>'account_circle'],

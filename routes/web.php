@@ -17,5 +17,5 @@ Route::get('/dashboard', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'Auth\LoginController@showLoginForm');
 Route::post('/imageUploader', 'ImageUploadController@upload');
