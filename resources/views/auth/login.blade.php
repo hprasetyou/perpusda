@@ -1,13 +1,12 @@
 @extends('layouts.front')
 
 @section('content')
-<v-container grid-list-md text-xs-center>
-    <v-layout row wrap>
-        <v-flex md8>
-        </v-flex>
-        <v-flex md4>
-            <login-form/>
-        </v-flex>
-    </v-layout>
+
+<v-container class="fill-height" fluid>
+    <v-row align="center" justify="center">
+        <v-col cols="12" sm="8" md="4">
+            <login-form />
+        </v-col>
+    </v-row>
 </v-container>
 @endsection
