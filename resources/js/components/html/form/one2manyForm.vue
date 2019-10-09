@@ -23,7 +23,7 @@
         <div v-show="!editMode || readOnly">
             <value-form :label="label" :value="getItemValue(value)" v-show="!editMode || readOnly" />
 
-            <v-layout row v-if="itemImage"><v-col
+            <v-layout row v-if="itemImage && itemData"><v-col
                     md="9"
                     offset-md="3">
                 <v-img v-if="itemData[itemImage]" :src="itemData[itemImage]" />

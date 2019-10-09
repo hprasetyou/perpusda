@@ -123,15 +123,16 @@
                 return new Promise((resolve, reject) => {
                     const {
                         sortBy,
-                        descending,
+                        sortDesc,
                         page,
                         rowsPerPage
                     } = this.pagination;
+                    
                     const params = {
                                 page: page,
                                 perpage: rowsPerPage,
                                 sortby: sortBy,
-                                descending,
+                                sortDesc,
                                 filter:[],
                                 filterValue:[],
                                 filterOperator:[]

@@ -48,7 +48,7 @@ class ResourceController extends Controller
     {
         $perpage = $request->query('perpage')?$request->query('perpage'):15;
         $orderCol = $request->query('sortby')?$request->query('sortby')[0]:'id';
-        $orderDirection = $request->query('descending') == 'true'?'desc':'asc';
+        $orderDirection = $request->query('sortDesc')[0] == 'true'?'desc':'asc';
         $data = $this->prepareData($request);
         if($request->query('q')){
             $data = $this->search($data,$request->query('q'));

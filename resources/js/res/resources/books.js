@@ -15,11 +15,18 @@ export default {
     },
     {
         text: 'Category',
-        value: 'category.name'
+        value: 'category.name',
+        sortable: false
     },
     {
         text: 'Author',
-        value: 'author.name'
+        value: 'author.name',
+        sortable: false
+    },
+    {
+        text: 'Publisher',
+        value: 'publisher.name',
+        sortable: false
     }],
     filterable:[{
         name:'name',

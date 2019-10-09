@@ -73,7 +73,7 @@
                 this.dataUrl = this.$route.meta.dataUrl;
                 this.filterable = this.$route.meta.filterable;
                 this.preFilter = this.$route.meta.preFilter;
-                
+                this.$refs.table.pagination.page = 1;
             },
             updateFilter(data){
                 this.$set(this,'filterData',data);

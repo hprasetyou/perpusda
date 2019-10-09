@@ -12,4 +12,7 @@ class Book extends Model
     function category(){
         return $this->belongsTo('App\Category','categories_id');
     }
+    function publisher(){
+        return $this->belongsTo('App\Publisher');
+    }
 }
